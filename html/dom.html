@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>DOM</title>
+		<style>
+			img {
+				width: 100px;
+				height: 80px;
+			}
+		</style>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>DOM</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>ng-disabled And ng-show</h2>
+			</dt>
+			<dd ng-controller="myCtrl" ng-init='type=1;mySwitch=true;imgShow=false'>
+				<p>
+					<input type="checkbox" ng-model="mySwitch" />禁用按钮
+				</p>
+				<p>
+					{{mySwitch}}
+				</p>
+				<p>
+					<button ng-disabled="mySwitch" ng-click="toogleImg()">Show Img</button>
+				</p>
+				<p ng-show="imgShow" data-type="{{type}}">
+					<img src="./../img/logo.jpg" />
+				</p>
+
+			</dd>
+		</dl>
+		<hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
+		<h2>Note:</h2>
+		
+		<p>绑定标签的属性时，如果是angular自带的属性，不需要加"{""{"}"}"，如：ngshow="imgShow"(imgShow是一个boolean变量).</p>
+		<p>而如果是一个自定义属性，则必须加"{""{"}"}"，如data-type="{"{"type"}"}".</p>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script>
+			var type = 1;
+			var app = angular.module("myApp", []);
+			app.controller("myCtrl", function($scope) {
+				$scope.toogleImg = function() {
+					$scope.type = (++type);
+					$scope.imgShow = !$scope.imgShow;
+				}
+			})
+		</script>
+	</body>
+
+</html>

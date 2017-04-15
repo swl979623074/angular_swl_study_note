@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>service</title>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>Service</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>$location</h2>
+			</dt>
+			<dd ng-controller='location'>
+				<span>current url: </span>{{current_url}}
+			</dd>
+			<dt>
+				<h2>$http</h2>
+			</dt>
+			<dd ng-controller='http'>
+				<div style="width: 300px;height: 200px;overflow-y: auto;overflow-x: hidden;border: 1px dotted #CCC; ">
+					{{result}}
+				</div>
+				<button ng-click="getRs() ">click me</button>
+			</dd>
+			<dt>
+				<h2>$watch</h2>
+			</dt>
+			<dd ng-controller='watch'>
+				<input type="text" ng-model='name'/><br />
+				<div ng-bind='name_copy' style="width: 400px;height: 100px;overflow-y: auto;overflow-x: hidden;border: 1px dotted #CCC; word-break: break-all;"></div>
+			</dd>
+			<dt>
+				<h2>Custom Service</h2>
+			</dt>
+			<dd ng-controller='custom'>
+				<input type="text" ng-model='str' ng-change="changeStr()"/><br />
+				To Array: {{str_rs}}
+			</dd>
+			<dt>
+				<h2>Use Costum Filter In Filter</h2>
+			</dt>
+			<dd>
+				<input type="text" ng-model='text_str'/><br />
+				To Array: {{text_str | customToArray}}
+			</dd>
+		</dl>
+
+		<script type="text/javascript " src="../js/angular.js "></script>
+		<script>
+			var app = angular.module("myApp", []);
+			app.controller("location", function($scope, $location) {
+				$scope.current_url = $location.absUrl();
+			});
+			app.controller("http", function($scope, $http) {
+				var url = "./../data/data.json ";
+				$scope.getRs = function() {
+					$http.get(url).then(function(res) {
+						$scope.result = res;
+					})
+				}
+			})
+			
+			app.service("custom",function(){
+				this.toArray = function(x){
+					if(angular.isString(x))
+						return x.split("");
+					return null;
+				}
+			})
+			app.filter("customToArray",['custom',function(custom){
+				return function(x){
+					return custom.toArray(x);
+				}
+			}])
+			app.controller("custom",function($scope,custom){
+				$scope.changeStr = function(){
+					$scope.str_rs = custom.toArray($scope.str);
+				}
+			})
+			
+			app.controller("watch",function($scope,custom){
+				$scope.$watch("name",function(){
+					$scope.name_copy = custom.toArray($scope.name);
+				})
+			});
+		</script>
+	</body>
+
+</html>

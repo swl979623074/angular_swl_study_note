@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>event</title>
+	</head>
+
+	<body ng-app="myApp">
+		<h1>Event</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>event list</h2>
+			</dt>
+			<dd>
+				<ul ng-controller='myCtrl'>
+					<li ng-repeat="event in events">{{event}}</li>
+				</ul>
+			</dd>
+		</dl>
+
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script>
+			var app = angular.module("myApp", []);
+			app.controller("myCtrl", function($scope) {
+				$scope.events = ["ng-click", "ng-dbl-click", "ng-mousedown", "ng-mouseenter", "ng-mouseleave", "ng-mousemove", "ng-keydown", "ng-keyup", "ng-keypress", "ng-change"];
+			})
+		</script>
+	</body>
+
+</html>

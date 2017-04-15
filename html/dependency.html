@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Dependency</title>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>Dependency Injection</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>value And constant</h2>
+			</dt>
+			<dd ng-controller='valueInjection'>
+				{{value}} <br />
+				{{key}}
+			</dd>
+			<dt>
+				<h2>service and factory</h2>
+			</dt>
+			<dd ng-controller="square">
+				<input type="number" ng-model='num' /><br /> The Square Is : {{square_num}}
+			</dd>
+		</dl>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script>
+			var app = angular.module("myApp", []);
+			app.value("value", "value injection");
+			app.constant("key","constant injection");
+			app.controller("valueInjection", function($scope, value,key) {
+				$scope.value = value;
+				$scope.key = key;
+			})
+			app.factory("MathFactory", function() {
+				return {
+					multiply: function(a, b) {
+						return a * b;
+					}
+				};
+			})
+			app.service("MathService", function(MathFactory) {
+				this.square = function(a) {
+					return MathFactory.multiply(a, a);
+				}
+			})
+
+			app.controller("square", function($scope, MathService) {
+				$scope.num = 0;
+				$scope.$watch("num", function() {
+					$scope.square_num = MathService.square($scope.num);
+				})
+			})
+		</script>
+	</body>
+
+</html>

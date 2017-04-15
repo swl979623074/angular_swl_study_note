@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>controller</title>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>Controller</h1>
+		<hr/>
+
+		<div ng-controller='myCtrl'>
+			firstName:<input type='text' ng-model='firstName' /><br /> lastName:
+			<input type='text' ng-model='lastName' /><br /> The Full Name Is : {{fullName()}}
+		</div>
+		<p>Note： 当时是函数时，必须加上"()",如：fullName()</p>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller("myCtrl", function($scope) {
+				$scope.firstName = "John";
+				$scope.lastName = "Doe";
+				$scope.fullName = function() {
+					return $scope.firstName + " " + $scope.lastName;
+				}
+			})
+		</script>
+	</body>
+
+</html>

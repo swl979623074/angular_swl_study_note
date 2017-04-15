@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>route</title>
+	</head>
+
+	<body>
+		<h1>Route</h1>
+		<hr />
+
+		<body ng-app='routingDemoApp'>
+
+			<h2>AngularJS 路由应用</h2>
+			<ul>
+				<li>
+					<a href="#/">首页</a>
+				</li>
+				<li>
+					<a href="#/computers">电脑</a>
+				</li>
+				<li>
+					<a href="#/printers">打印机</a>
+				</li>
+				<li>
+					<a href="#/blabla">其他</a>
+				</li>
+			</ul>
+
+			<div ng-view></div>
+			<hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
+			<h2>Note:</h2>
+			<p>当路由到一个由angular写份页面时，页面显示会出错，控制台有报错</p>
+			<p>问题未解决。引发原因：未知。</p>
+			
+			<script type="text/javascript" src="../js/angular.js" ></script>
+			<script type="text/javascript" src="../js/angular-route.js" ></script>
+			<script>
+				angular.module('routingDemoApp', ['ngRoute'])
+					.config(['$routeProvider', function($routeProvider) {
+						$routeProvider
+							.when('/', {
+								template: '这是首页页面'
+							})
+							.when('/computers', {
+								template: '这是电脑分类页面',
+								//templateUrl:"./../html/event.html"
+							})
+							.when('/printers', {
+								template: '这是打印机页面'
+							})
+							.otherwise({
+								redirectTo: '/'
+							});
+					}]);
+			</script>
+
+		</body>
+	</body>
+
+</html>

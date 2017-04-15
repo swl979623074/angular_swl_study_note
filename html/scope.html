@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>scope</title>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>Scope</h1>
+		<hr />
+		<dl>
+			<dt><h2>局部作用域</h2> </dt>
+			<dd>
+				<div ng-controller='first_ctrl'>
+					<input ng-model="name" ng-change='valChange()'>
+					<h3>{{greeting}}</h3>
+					<button ng-click='sayHello()'>点我</button>
+				</div>
+			</dd>
+			<dt><h2>全局作用域</h2></dt>
+			<dd>
+				<div ng-controller='second_ctrl'>
+					<h3>{{greeting}}</h3>
+					<button ng-click='sayHello()'>点我</button>
+				</div>
+			</dd>
+			
+			<p>作用域：局部作用域和全局作用域。通过全局作用域实现局部作用域之间数据的交互。</p>
+		</dl>
+
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script>
+			var app = angular.module("myApp", []);
+			var first_ctrl = app.controller("first_ctrl", function($scope, $rootScope) {
+				$scope.name = "Runoob";
+				$scope.sayHello = function() {
+					$scope.greeting = 'Hello ' + $scope.name + '!';
+				};
+				
+				$scope.valChange = function(){
+					console.log($scope.name);
+					$rootScope.first_ctrl_name = $scope.name;
+				}
+				$rootScope.first_ctrl_name = $scope.name;
+			})
+			var second_ctrl = app.controller("second_ctrl", function($scope, $rootScope) {
+
+				$scope.sayHello = function() {
+					$scope.greeting = 'Hello ' + $rootScope.first_ctrl_name + '!';
+				};
+			})
+		</script>
+	</body>
+
+</html>

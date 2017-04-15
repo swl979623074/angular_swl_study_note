@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>anglar</title>
+	</head>
+	<body ng-app='myApp' >
+		<h1>angularJS demo list</h1>
+		<ul ng-controller='myCtrl'>
+			<li ng-repeat='data in datas'>
+				<a href='{{data.href}}' id='{{data.id}}'>{{data.name}}</a>
+			</li>
+		</ul>
+		<script type="text/javascript" src="js/angular.js" ></script>
+		<script>
+		var app =  angular.module("myApp",[]);
+		app.controller('myCtrl',function($scope){
+			$scope.datas = [
+				{id:"1",name:"expression",href:"./html/expression.html"},
+				{id:"2",name:"directive",href:"./html/directive.html"},
+				{id:"3",name:"scope",href:"./html/scope.html"},
+				{id:"4",name:"controller",href:"./html/controller.html"},
+				{id:"5",name:"filter",href:"./html/filter.html"},
+				{id:"6",name:"service",href:"./html/service.html"},
+				{id:"7",name:"http",href:"./html/http.html"},
+				{id:"8",name:"select",href:"./html/select.html"},
+				{id:"9",name:"table",href:"./html/table.html"},
+				{id:"9",name:"DOM",href:"./html/dom.html"},
+				{id:"10",name:"event",href:"./html/event.html"},
+				{id:"11",name:"dependency injection",href:"./html/dependency.html"},
+				{id:"12",name:"route",href:"./html/route.html"},
+				{id:"13",name:"app",href:"./html/app.html"}
+			];
+		})
+	</script>
+	</body>
+	
+</html>

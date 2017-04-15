@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>expression</title>
+		<style>
+			span{
+				width: 100px;
+				display: inline-block;
+			}
+		</style>
+	</head>
+
+	<body ng-app='' ng-init="one=0;two=0">
+		<h1>Expression</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>multiplication</h2>
+			</dt>
+			<dd>
+				<input type='number' ng-model='one' />*
+				<input type='number' ng-model='two' />= {{one * two}}
+			</dd>
+			<dt>
+				<h2>String</h2>
+			</dt>
+			<dd>
+				<ul>
+					<li>
+						<span>firstName: </span><input type='text' ng-model='firstName' />
+					</li>
+					<li>
+						<span>lastName: </span><input type='text' ng-model='lastName' />
+					</li>
+					<li>The Name is : {{firstName +" "+lastName}} </li>
+				</ul>
+			</dd>
+			<dt>
+				<h2>Object</h2>
+			</dt>
+			<dd ng-init="name={firstName:'joke',lastName:'tom'}">
+				The object is : {{name}}
+			</dd>
+			<dt>
+				<h2>Array</h2>
+			</dt>
+			<dd ng-init="users=['swl','smx','zzz']">
+				<h3>user list</h3>
+				<ul>
+					<li ng-repeat='user in users'>{{user}}</li>
+				</ul>
+			</dd>
+		</dl>
+
+		<script type="text/javascript" src="../js/angular.js"></script>
+	</body>
+
+</html>

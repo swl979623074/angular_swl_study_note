@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>filter</title>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>Filter</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>uppercase</h2>
+			</dt>
+			<dd>
+				<input type="text" ng-model='nameOne' placeholder="toUpperCase"/>
+				<span>result: </span> {{nameOne | uppercase}}
+			</dd>
+			<dt>
+				<h2>lowercase</h2>
+			</dt>
+			<dd>
+				<input type="text" ng-model='nameTwo' placeholder="toLowerCase"/>
+				<span>result: </span> {{nameTwo | lowercase}}
+			</dd>
+			<dt>
+				<h2>orderBy</h2>
+			</dt>
+			<dd>
+				<div ng-controller="order">
+					<ul>
+						<li ng-repeat="data in datas | orderBy:'id':false">{{data.id +" "+data.name}}</li>
+					</ul>
+				</div>
+			</dd>
+			
+			<dt>
+				<h2>filter</h2>
+			</dt>
+			<dd>
+				<div ng-controller="filter">
+					Filter Condition: <input type="text" ng-model='filter_str'/>
+					<ul>
+						<li ng-repeat="data in datas | filter:filter_str">{{data}}</li>
+					</ul>
+				</div>
+			</dd>
+			
+			<dt>
+				<h2>Custom Filter</h2>
+			</dt>
+			<dd ng-init="custom=''">
+				<input type="text" ng-model='custom'/>
+				<span>result: </span> {{custom | toArray}}
+			</dd>
+		</dl>
+		<hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
+		<div>
+			<h2>Note(other filter):</h2>
+			<ul>
+				<li>1490161945000 | date:"yyyy-MM-dd HH:mm:ss" --> // 2017-03-22 13:52:25</li>
+				<li>149016.1945000 | number:2  --> {{149016.1945000 | number:2 }}//保留小数</li>
+				<li> 250 | currency -->  {{250 | currency}}       // 结果：$250.00</li>
+				<li> 250 | currency:"RMB ￥ " --> {{250 | currency:"RMB ￥ "}}  // 结果：RMB ￥ 250.00</li>
+				<li>"1234567890" | limitTo :6  --> {{"1234567890" | limitTo :6}}// 从前面开始截取6位</li>
+				<li>"1234567890" | limitTo:-4  --> {{"1234567890" | limitTo:-4}}// 从后面开始截取4位</li>
+				<li>orderBy:'id':true //降序</li>
+				<li>orderBy:'id':false //升序(默认为升序)</li>
+			</ul>
+			
+		</div>
+		<script type="text/javascript" src="../js/angular.js" ></script>
+		<script>
+			var app = angular.module("myApp",[]);
+			app.controller("order",function($scope){
+				$scope.datas = [
+					{id:'5',name:"Jhon"},
+					{id:'3',name:"Tom"},
+					{id:'4',name:"Jack"},
+					{id:'1',name:"Pipin"},
+					{id:'2',name:"Merry"}
+				];
+			})
+			app.controller("filter",function($scope){
+				$scope.datas = [
+					'swl','tom','Jack','Moke','aobama'
+				];
+			})
+			app.filter('toArray',function(){
+				return function(text){
+					return text.split("");
+				}
+			})
+		</script>
+	</body>
+
+</html>

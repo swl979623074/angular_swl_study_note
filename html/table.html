@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>table</title>
+		<style>
+			table,
+			th,
+			td {
+				border: 1px solid grey;
+				border-collapse: collapse;
+				padding: 5px;
+			}
+			
+			table tr:nth-child(odd) {
+				background-color: #f1f1f1;
+			}
+			
+			table tr:nth-child(even) {
+				background-color: #ffffff;
+			}
+		</style>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>Table</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>A Table</h2>
+			</dt>
+			<dd>
+				<table ng-controller='myCtrl'>
+					<tr>
+						<th>#</th>
+						<th>Name</th>
+						<th>City</th>
+						<th>Country</th>
+					</tr>
+					<tr ng-repeat="data in datas | orderBy:'City'">
+						<td>{{$index + 1}}</td>
+						<td>{{data.Name}}</td>
+						<td>{{data.City}}</td>
+						<td>{{data.Country | uppercase}}</td>
+					</tr>
+				</table>
+			</dd>
+		</dl>
+
+		<script src="../js/angular.js"></script>
+		<script>
+			var app = angular.module("myApp", []);
+			app.controller("myCtrl", function($scope, $http) {
+				$http.get("./../data/data.json").then(function(res) {
+					$scope.datas = res.data.list;
+				});
+			});
+		</script>
+	</body>
+
+</html>

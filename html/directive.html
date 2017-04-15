@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>directive</title>
+		<style>
+			b{
+				color:orange;
+			}
+		</style>
+	</head>
+
+	<body ng-app='myApp'>
+		<h1>Directive</h1>
+		<hr />
+		<dl>
+			<dt>
+				<h2>Common Instruction</h2>
+			</dt>
+			<dd>
+				<ul ng-init="cmds=['ng-app','ng-init','ng-model','ng-bind','ng-repeat','ng-controller']">
+					<li ng-repeat="cmd in cmds">{{cmd}}</li>
+				</ul>
+			</dd>
+			<dt>
+				<h2>Custom Instruction</h2>
+			</dt>
+			<dd>
+				<dl>
+					<dt>
+						通过<b>标签</b>获取自定义指令：
+					</dt>
+					<dd>
+						<my-instuction></my-instuction>
+					</dd>
+					<dt>
+						通过<b>类名</b> 获取自定义指令：
+					</dt>
+					<dd>
+						<div class="my-instuction"></div>
+					</dd>
+					<dt>
+						通过<b>属性</b>获取自定义指令：
+					</dt>
+					<dd>
+						<div my-instuction></div>
+					</dd>
+					<dt>
+						通过<b>注释</b>获取自定义指令：
+					</dt>
+					<dd>
+						<!-- directive: my-instuction -->
+					</dd>
+				</dl>
+
+			</dd>
+		</dl>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<script>
+			var app = angular.module("myApp", []);
+			app.directive("myInstuction", function() {
+				return {
+					scope:true, // 继承父级作用域并创建指令自己的作用域 或者{}，自定义作用域
+					restrict:"AECM",//默认为EA
+					template: "<span>This is a custom instruction</span>"
+				}
+			})
+		</script>
+	</body>
+
+</html>

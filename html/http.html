@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>http</title>
+	</head>
+
+	<body>
+		<h1>Http</h1>
+		<hr />
+
+		<dl>
+			<dt>
+				<h2>$http</h2>
+			</dt>
+			<dd>
+				<blockquote>
+					var req = { method:"GET",url:"/",data:""}
+				</blockquote>
+				<blockquote>
+					$http(req).then(successFuc,errorFuc)
+				</blockquote>
+			</dd>
+			<dt>
+				<h2>$http.get()</h2>
+			</dt>
+			<dd>
+				<blockquote>
+					$http.get('/someUrl', config).then(successCallback, errorCallback);
+				</blockquote>
+			</dd>
+			<dt>
+				<h2>$http.post()</h2>
+			</dt>
+			<dd>
+				<blockquote>
+					$http.post('/someUrl', data, config).then(successCallback, errorCallback);
+				</blockquote>
+			</dd>
+		</dl>
+		<hr style=" height:2px;border:none;border-top:2px dotted #185598;" />
+		<p>
+			<h2>The Config</h2>
+			<span>Note: can not understand the config</span>
+			<span>
+				<a href='https://docs.angularjs.org/api/ng/service/$http'>details</a>
+			</span>
+		</p>
+		<script type="text/javascript" src="../js/angular.js"></script>
+
+	</body>
+
+</html>
